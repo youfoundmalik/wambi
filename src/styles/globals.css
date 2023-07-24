@@ -3,25 +3,214 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  font-family: "Gordita", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  color-scheme: light dark;
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Gordita", sans-serif !important;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+/* button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  background-color: inherit;
+  background-image: inherit;
+} */
+
+.drop-shadow {
+  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.05));
+}
+
+.MuiButtonBase-root {
+  text-transform: capitalize !important;
+}
+
+.gradient-btn {
+  background: linear-gradient(88.42deg, #1976d2 -47.61%, #172955 154.19%);
+  color: #fff;
+}
+
+.sub-heading {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: inherit;
+  list-style-position: outside;
+}
+
+ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  margin-top: 30px;
+}
+
+li {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.markdown h5 {
+  margin-top: 25px;
+}
+
+.markdown h1 {
+  margin-top: 25px;
+  font-size: 32px;
+  line-height: 45px;
+  font-weight: 700;
+}
+
+.markdown h3 {
+  margin-top: 15px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.markdown h4 {
+  margin-top: 40px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.markdown li {
+  margin-top: 5px;
+}
+
+.markdown p {
+  margin-top: 15px;
+  line-height: 27px;
+}
+
+.markdown a {
+  color: #1976d2;
+}
+
+.markdown h6 {
+  color: #172955;
+  margin-top: 50px;
+  font-size: 14px;
+  line-height: 27px;
+  opacity: 80%;
+}
+
+.rich-text p {
+  margin-top: 20px;
+  line-height: 27px;
+}
+
+.rich-text h1 {
+  margin-top: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.rich-text h3 {
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.rich-text h4 {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.responsive-mode {
+  display: none;
+}
+
+.desktop-mode {
+  display: flex;
+}
+
+@media screen and (max-width: 900px) {
+  .responsive-mode {
+    display: flex;
+  }
+
+  .desktop-mode {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sub-heading {
+    font-size: 20px;
+  }
+  .markdown h1 {
+    margin-top: 15px;
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .markdown h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .markdown h4 {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .markdown h5 {
+    margin-top: 15px;
+  }
+
+  .markdown li {
+    margin-top: 5px;
+  }
+
+  .markdown p {
+    margin-top: 10px;
+    line-height: 24px;
+    font-size: 14px;
+  }
+  li {
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .rich-text h1 {
+    margin-top: 25px;
+    font-size: 24px;
+    line-height: unset;
+  }
+
+  .rich-text h3 {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: unset;
+  }
+
+  .rich-text h4 {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: unset;
+  }
 }
