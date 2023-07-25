@@ -67,6 +67,7 @@ export async function getStaticProps() {
       testimonials: testimonials.data,
       ip: ipData.ip,
     },
+    revalidate: 3600,
   }
 }
 
