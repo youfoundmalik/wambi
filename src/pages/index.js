@@ -1,7 +1,5 @@
-import Image from "next/image"
 import { Box, Stack } from "@mui/material"
 
-import PageLayout from "@/components/layout/PageLayout"
 import BannerArea from "@/components/home/BannerArea"
 import About from "@/components/home/HowWeHelp"
 import News from "@/components/home/InTheNews"
@@ -9,52 +7,67 @@ import KeyPoints from "@/components/home/KeyPoints"
 import ReferralDoc from "@/components/home/ReferralDoc"
 import Team from "@/components/home/Team"
 import Testimonial from "@/components/home/Testimonial"
+import AppContext from "@/store/context"
+import {
+  fetchAllStaff,
+  fetchAllTestimonials,
+  fetchIpAddress,
+} from "@/services/actions"
+import { useContext, useEffect } from "react"
+import TagManager from "react-gtm-module"
 
-const LandingPage = () => {
-  // const tagManagerArgs = {
-  //   dataLayer: {
-  //     userId: useContext(UserContext),
-  //     userProject: "Dr.Lullaby-marketing",
-  //     page: "Home",
-  //   },
-  //   dataLayerName: "PageDataLayer",
-  // };
+const LandingPage = ({ staff, testimonials, ip }) => {
+  const ipCtx = useContext(AppContext)
 
-  // TagManager.dataLayer(tagManagerArgs);
+  useEffect(() => {
+    if (ip) {
+      ipCtx.setIp(ip)
+    }
+
+    const tagManagerArgs = {
+      dataLayer: {
+        userId: ip || ipCtx.ipAddress,
+        userProject: "Dr.Lullaby-marketing",
+        page: "Home",
+      },
+      dataLayerName: "PageDataLayer",
+    }
+
+    TagManager.dataLayer(tagManagerArgs)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Box className="container-box">
-      {/* <Helmet>
-        <title>DrLullaby Sleep Treatment Center (Insomnia)</title>
-        <link rel="canonical" href="/" />
-        <meta
-          property="og:image"
-          content="https://drlullaby-marketing.s3.us-east-2.amazonaws.com/share_3e88e26f77.png"
-        />
-        <meta
-          name="description"
-          content="Affordable online platform treating sleep disorders. Connect with experts for insomnia, sleep remedies, therapy, and medication."
-        />
-      </Helmet> */}
-      <PageLayout
-        sxFooter={{ mt: "0px", pt: { xs: "70px", sm: "100px", md: "120px" } }}
-      >
-        <BannerArea />
-        <KeyPoints />
-        <Stack className="mt-[50px] lg:gap-[100px] md:gap-[70px] gap-[50px]">
-          <Box>
-            <Testimonial />
-            <News />
-          </Box>
-          <Team />
-          <Box>
-            <About />
-            <ReferralDoc />
-          </Box>
-        </Stack>
-      </PageLayout>
+      <BannerArea />
+      <KeyPoints />
+      <Stack className="mt-[50px] lg:gap-[100px] md:gap-[70px] gap-[50px]">
+        <Box>
+          <Testimonial data={testimonials} />
+          <News />
+        </Box>
+        <Team data={staff} />
+        <Box>
+          <About />
+          <ReferralDoc />
+        </Box>
+      </Stack>
     </Box>
   )
+}
+
+export async function getStaticProps() {
+  const ipData = await fetchIpAddress()
+  const testimonials = await fetchAllTestimonials()
+  const staff = await fetchAllStaff()
+
+  return {
+    props: {
+      staff: staff.data,
+      testimonials: testimonials.data,
+      ip: ipData.ip,
+    },
+  }
 }
 
 export default LandingPage

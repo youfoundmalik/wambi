@@ -45,6 +45,7 @@ const BannerArea = () => {
               alt="banner"
               layout="fill"
               objectFit="cover"
+              quality={100}
               className={`carousel-item carousel-item-${i} h-[100px] ${
                 active === i ? "carousel-item__next" : ""
               }`}

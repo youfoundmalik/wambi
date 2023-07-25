@@ -10,8 +10,8 @@ import { fetchAllTestimonials } from "../../services/actions"
 import Image from "next/image"
 import { images } from "@/utils/assets"
 
-const Testimonial = () => {
-  const [testimonials, setTestimonials] = useState([])
+const Testimonial = ({ data }) => {
+  const [testimonials, setTestimonials] = useState(data)
 
   useEffect(() => {
     const getAllTestimonials = async () => {

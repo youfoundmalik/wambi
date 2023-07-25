@@ -6,60 +6,60 @@ import {
   DialogTitle,
   IconButton,
   Slide,
-} from "@mui/material";
-import { forwardRef, useEffect, useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+} from "@mui/material"
+import { forwardRef, useEffect, useState } from "react"
+import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 
-import { fetchAllStaff } from "../../services/actions";
-import CallToAction from "../shared/CallToAction";
-import Section from "../shared/Section";
-import Clinician from "../staff/Clinician";
-import Advisor from "../staff/Advisor";
-import Leadership from "../staff/Leadership";
+import { fetchAllStaff } from "../../services/actions"
+import CallToAction from "../shared/CallToAction"
+import Section from "../shared/Section"
+import Clinician from "../staff/Clinician"
+import Advisor from "../staff/Advisor"
+import Leadership from "../staff/Leadership"
 
 const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
+  return <Slide direction="down" ref={ref} {...props} />
+})
 
 const CloseIcon = createSvgIcon(
   <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />,
-  "Close"
-);
+  "Close",
+)
 
-const Team = () => {
-  const [open, setOpen] = useState(false);
-  const [leadership, setLeadership] = useState([]);
-  const [clinician, setClinician] = useState([]);
-  const [advisor, setAdvisor] = useState([]);
-  const [popup, setPopup] = useState(null);
+const filterRole = (dataArr, param) =>
+  dataArr.data?.filter((staff) => staff?.attributes?.role === param) || []
 
-  const filterRole = (dataArr, param) =>
-    dataArr.data?.filter((staff) => staff?.attributes?.role === param) || [];
+const Team = ({ data }) => {
+  const [open, setOpen] = useState(false)
+  const [leadership, setLeadership] = useState(filterRole(data, "leadership"))
+  const [clinician, setClinician] = useState(filterRole(data, "clinician"))
+  const [advisor, setAdvisor] = useState(filterRole(data, "advisor"))
+  const [popup, setPopup] = useState(null)
 
   const handleClickOpen = (prop) => {
-    setPopup(prop);
-    setOpen(true);
-  };
+    setPopup(prop)
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-    setPopup(null);
-  };
+    setOpen(false)
+    setPopup(null)
+  }
 
   useEffect(() => {
     const getAllStaff = async () => {
       try {
-        const response = await fetchAllStaff();
+        const response = await fetchAllStaff()
         if (response) {
-          setLeadership(filterRole(response, "leadership"));
-          setAdvisor(filterRole(response, "advisor"));
-          setClinician(filterRole(response, "clinician"));
+          setLeadership(filterRole(response, "leadership"))
+          setAdvisor(filterRole(response, "advisor"))
+          setClinician(filterRole(response, "clinician"))
         }
       } finally {
       }
-    };
-    getAllStaff();
-  }, []);
+    }
+    getAllStaff()
+  }, [])
 
   return (
     <>
@@ -207,7 +207,7 @@ const Team = () => {
         )}
       </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default Team;
+export default Team

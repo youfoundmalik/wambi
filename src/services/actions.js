@@ -1,3 +1,4 @@
+import axios from "axios"
 import Axios from "../config/Axios"
 
 export const fetchAllStaff = async () => {
@@ -55,6 +56,14 @@ export const fetchPrivacyPolicy = async () => {
 export const fetchTerms = async () => {
   try {
     const response = await Axios("/terms-condition")
+    const data = await response.data
+    return data
+  } catch (error) {}
+}
+
+export const fetchIpAddress = async () => {
+  try {
+    const response = await axios("https://api.ipify.org?format=json")
     const data = await response.data
     return data
   } catch (error) {}
