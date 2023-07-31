@@ -3,14 +3,14 @@ import { Box } from "@mui/material"
 
 import { images } from "@/utils/assets"
 
-const PageHeader = ({ children, sx }) => {
+const PageHeader = ({ children, sx, image }) => {
   return (
     <Box
       className="generic-header text-center md:px-[100px] px-[20px] border-b-4 relative border-secondary"
       sx={{ py: { xs: "50px", sm: "100px" }, ...sx }}
     >
       <Image
-        src={images.metrics}
+        src={image || images.metrics}
         alt="background"
         layout="fill"
         objectFit="cover"

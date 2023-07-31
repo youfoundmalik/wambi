@@ -8,6 +8,7 @@ import PageHeader from "@/components/layout/PageHeader"
 import { fetchAllBlogs, fetchIpAddress } from "@/services/actions"
 import Section from "@/components/shared/Section"
 import AppContext from "@/store/context"
+import { trimURL } from "@/utils/helperFunctions"
 
 const Blog = ({ data, ipData }) => {
   const ipCtx = useContext(AppContext)

@@ -24,15 +24,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-  background-color: inherit;
-  background-image: inherit;
-} */
-
 .drop-shadow {
   filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.05));
 }

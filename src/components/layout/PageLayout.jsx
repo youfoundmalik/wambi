@@ -44,11 +44,13 @@ const PageLayout = ({ children, sxHeader, sxFooter }) => {
           content="-ad_n1bWchPvP2uvwPga9nNHsqADI_rWX0G7tJTHmdk"
         />
       </Head>
-      <Header sx={sxHeader} />
-      <Box id="content" component="main" className="flex-grow">
-        {children}
+      <Box className="flex flex-col min-h-screen application">
+        <Header sx={sxHeader} />
+        <Box id="content" component="main" className="flex-grow">
+          {children}
+        </Box>
+        <Footer sx={sxFooter} />
       </Box>
-      <Footer sx={sxFooter} />
     </>
   )
 }
