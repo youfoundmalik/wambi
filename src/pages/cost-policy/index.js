@@ -8,17 +8,17 @@ import { fetchIpAddress } from "@/services/actions"
 import Section from "@/components/shared/Section"
 import AppContext from "@/store/context"
 
-const CostPolicy = ({ ip }) => {
+const CostPolicy = ({ ipData }) => {
   const ipCtx = useContext(AppContext)
 
   useEffect(() => {
-    if (ip) {
-      ipCtx.setIp(ip)
+    if (ipData) {
+      ipCtx.setIp(ipData?.ip)
     }
 
     const tagManagerArgs = {
       dataLayer: {
-        userId: ip || ipCtx.ipAddress,
+        userId: ipData?.ip || ipCtx?.ipAddress || "",
         userProject: "Dr.Lullaby-marketing",
         page: "Cost Policy",
       },
@@ -280,7 +280,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      ip: ipData.ip,
+      ipData: ipData || null,
     },
     revalidate: 43200,
   }

@@ -9,17 +9,17 @@ import PageHeader from "@/components/layout/PageHeader"
 import Section from "@/components/shared/Section"
 import AppContext from "@/store/context"
 
-const TermsAndConditions = ({ ip, policy }) => {
+const TermsAndConditions = ({ ipData, termsData }) => {
   const ipCtx = useContext(AppContext)
 
   useEffect(() => {
-    if (ip) {
-      ipCtx.setIp(ip)
+    if (ipData) {
+      ipCtx.setIp(ipData?.ip)
     }
 
     const tagManagerArgs = {
       dataLayer: {
-        userId: ip || ipCtx.ipAddress,
+        userId: ipData?.ip || ipCtx?.ipAddress || "",
         userProject: "Dr.Lullaby-marketing",
         page: "Terms and Conditions",
       },
@@ -40,8 +40,8 @@ const TermsAndConditions = ({ ip, policy }) => {
       <PageHeader>Terms and Conditions</PageHeader>
       <Section className="md:my-[100px] lg:mx-[50px] my-[50px]">
         <Box className="drop-shadow bg-white border-2 border-off-white box-border rounded-[10px] lg:p-[50px] lg:pb-[80px] md:px-[20px] px-[10px] pt-[20px] pb-[40px]">
-          <Box id="privacy-policy-details" className="rich-text text-black">
-            {parse(`${policy || ""}`)}
+          <Box id="terms-conditions-details" className="rich-text text-black">
+            {parse(`${termsData?.data?.attributes?.body || ""}`)}
           </Box>
         </Box>
       </Section>
@@ -51,12 +51,12 @@ const TermsAndConditions = ({ ip, policy }) => {
 
 export async function getStaticProps() {
   const ipData = await fetchIpAddress()
-  const policy = await fetchTerms()
+  const termsData = await fetchTerms()
 
   return {
     props: {
-      policy: policy.data.attributes.body,
-      ip: ipData.ip,
+      termsData: termsData || null,
+      ipData: ipData || null,
     },
     revalidate: 43200,
   }

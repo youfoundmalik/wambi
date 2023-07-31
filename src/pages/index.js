@@ -16,17 +16,17 @@ import {
 import { useContext, useEffect } from "react"
 import TagManager from "react-gtm-module"
 
-const LandingPage = ({ staff, testimonials, ip }) => {
+const LandingPage = ({ staff, testimonials, ipData }) => {
   const ipCtx = useContext(AppContext)
 
   useEffect(() => {
-    if (ip) {
-      ipCtx.setIp(ip)
+    if (ipData) {
+      ipCtx.setIp(ipData?.ip)
     }
 
     const tagManagerArgs = {
       dataLayer: {
-        userId: ip || ipCtx.ipAddress,
+        userId: ipData?.ip || ipCtx?.ipAddress || "",
         userProject: "Dr.Lullaby-marketing",
         page: "Home",
       },
@@ -43,10 +43,10 @@ const LandingPage = ({ staff, testimonials, ip }) => {
       <KeyPoints />
       <Stack className="mt-[50px] lg:gap-[100px] md:gap-[70px] gap-[50px]">
         <Box>
-          <Testimonial data={testimonials} />
+          <Testimonial data={testimonials?.data} />
           <News />
         </Box>
-        <Team data={staff} />
+        <Team data={staff?.data} />
         <Box>
           <About />
           <ReferralDoc />
@@ -63,9 +63,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      staff: staff.data,
-      testimonials: testimonials.data,
-      ip: ipData.ip,
+      staff: staff || null,
+      testimonials: testimonials || null,
+      ipData: ipData || null,
     },
     revalidate: 3600,
   }

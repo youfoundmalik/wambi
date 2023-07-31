@@ -27,7 +27,7 @@ const CloseIcon = createSvgIcon(
 )
 
 const filterRole = (dataArr, param) =>
-  dataArr.data?.filter((staff) => staff?.attributes?.role === param) || []
+  dataArr?.data?.filter((staff) => staff?.attributes?.role === param) || []
 
 const Team = ({ data }) => {
   const [open, setOpen] = useState(false)

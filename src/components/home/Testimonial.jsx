@@ -43,7 +43,7 @@ const Testimonial = ({ data }) => {
           Cognitive Behavioral Treatment for Insomnia (CBT-I)
         </h3>
         <Box className="testimonial-slider mx-auto md:py-[50px] md:mt-[10px] lg:w-[85%] mt-[40px]">
-          {testimonials.length > 0 && (
+          {testimonials?.length > 0 && (
             <SlickSlider slidesToShow={1} slidesToScroll={1} showArrows={true}>
               {testimonials?.map((quote, i) => (
                 <Card key={i} quote={quote} />

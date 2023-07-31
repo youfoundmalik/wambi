@@ -267,7 +267,8 @@
   filter: blur(5px);
   -webkit-filter: blur(5px);
 }
-#privacy-policy-details p {
+#privacy-policy-details p,
+#terms-conditions-details p {
   font-size: 14px;
   line-height: 24px;
 }

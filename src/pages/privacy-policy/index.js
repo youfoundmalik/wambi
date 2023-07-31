@@ -9,17 +9,17 @@ import PageHeader from "@/components/layout/PageHeader"
 import Section from "@/components/shared/Section"
 import AppContext from "@/store/context"
 
-const PrivacyPolicy = ({ policy, ip }) => {
+const PrivacyPolicy = ({ policyData, ipData }) => {
   const ipCtx = useContext(AppContext)
 
   useEffect(() => {
-    if (ip) {
-      ipCtx.setIp(ip)
+    if (ipData) {
+      ipCtx.setIp(ipData?.ip)
     }
 
     const tagManagerArgs = {
       dataLayer: {
-        userId: ip || ipCtx.ipAddress,
+        userId: ipData?.ip || ipCtx?.ipAddress || "",
         userProject: "Dr.Lullaby-marketing",
         page: "Privacy Policy",
       },
@@ -39,10 +39,10 @@ const PrivacyPolicy = ({ policy, ip }) => {
 
       <PageHeader>Privacy Policy</PageHeader>
       <Section className="md:my-[100px] lg:mx-[50px] my-[50px]">
-        {policy && (
+        {policyData && (
           <Box className="drop-shadow bg-white border-2 border-off-white box-border rounded-[10px] lg:p-[50px] lg:pb-[80px] md:px-[20px] px-[10px] pt-[20px] pb-[40px]">
             <Box id="privacy-policy-details" className="rich-text text-black">
-              {parse(`${policy || ""}`)}
+              {parse(`${policyData?.data?.attributes?.body || ""}`)}
             </Box>
           </Box>
         )}
@@ -53,12 +53,12 @@ const PrivacyPolicy = ({ policy, ip }) => {
 
 export async function getStaticProps() {
   const ipData = await fetchIpAddress()
-  const policy = await fetchPrivacyPolicy()
+  const policyData = await fetchPrivacyPolicy()
 
   return {
     props: {
-      policy: policy.data.attributes.body,
-      ip: ipData.ip,
+      policyData: policyData || null,
+      ipData: ipData || null,
     },
     revalidate: 43200,
   }
