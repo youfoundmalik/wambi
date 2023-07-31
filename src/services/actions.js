@@ -27,10 +27,10 @@ export const fetchAllNews = async (page = 1) => {
   } catch (error) {}
 }
 
-export const fetchAllBlogs = async (page = 1) => {
+export const fetchAllBlogs = async (page = 1, size = 12) => {
   try {
     const response = await Axios(
-      `/blogs?pagination[page]=${page}&pagination[pageSize]=12&populate=*`,
+      `/blogs?pagination[page]=${page}&pagination[pageSize]=${size}&populate=*`,
     )
     const data = await response.data
     return data

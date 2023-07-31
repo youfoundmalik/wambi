@@ -1,5 +1,5 @@
 export const trimURL = (url) => {
-  const trim = url?.toLowerCase()?.replaceAll(" ", "-")
+  const trim = url?.toLowerCase()?.replaceAll(" ", "-")?.replaceAll("?", "")
   return trim
 }
 

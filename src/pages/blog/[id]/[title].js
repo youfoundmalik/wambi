@@ -119,7 +119,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const response = await fetchAllBlogs()
+  const response = await fetchAllBlogs(1, 20)
 
   const parameters = await response?.data?.map((post) => ({
     params: {
